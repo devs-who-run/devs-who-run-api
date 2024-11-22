@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("devs-who-run-api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+54060867fd0fa219ca2a1916c3d08474ea50dd74")]
 [assembly: System.Reflection.AssemblyProductAttribute("devs-who-run-api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("devs-who-run-api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

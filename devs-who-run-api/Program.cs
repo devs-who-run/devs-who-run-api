@@ -22,14 +22,8 @@ var partnerConference = new[] { "TIL Conf"}
 ;
 
 
-
 app.MapGet("/getPartnerConference", () => partnerConference).WithName("GetPartnerConferences").WithOpenApi();
 
 // app.MapPost("/addMember", async (Member member)=> )
 
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
