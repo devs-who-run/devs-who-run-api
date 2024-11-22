@@ -1,0 +1,6 @@
+@devs_who_run_api_HostAddress = http://localhost:5299
+
+GET {{devs_who_run_api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

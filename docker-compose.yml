@@ -1,0 +1,6 @@
+﻿services:
+  devs-who-run-api:
+    image: devs-who-run-api
+    build:
+      context: .
+      dockerfile: devs-who-run-api/Dockerfile
