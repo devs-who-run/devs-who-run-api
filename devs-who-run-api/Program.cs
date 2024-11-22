@@ -25,7 +25,7 @@ var partnerConference = new[] { "TIL Conf"}
 
 app.MapGet("/getPartnerConference", () => partnerConference).WithName("GetPartnerConferences").WithOpenApi();
 
-app.MapPost("/addMember", async (Member member)=> )
+// app.MapPost("/addMember", async (Member member)=> )
 
 app.Run();
 
