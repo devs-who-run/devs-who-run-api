@@ -28,7 +28,29 @@ var partnerConference = new[] { "TIL Conf" }
 ;
 
 
-app.MapGet("/getPartnerConference", () => partnerConference).WithName("GetPartnerConferences").WithOpenApi();
+app.MapGet("/getPartnerConference", async (DevsWhoRunDbContext db) =>
+{
+    var conferences = db.Members.Where(m => m.UserType == UserType.Conf).ToListAsync();
+
+    if (!conferences.Any())
+    {
+        return Results.NotFound(new { Message = "No partner conferences found." });
+    }
+
+    return Results.Ok(conferences);
+});
+
+app.MapGet("/getPartnerMeetup", async (DevsWhoRunDbContext db) =>
+{
+    var meetups = db.Members.Where(m => m.UserType == UserType.Meetup).ToListAsync();
+
+    if (!meetups.Any())
+    {
+        return Results.NotFound(new { Message = "No partner meetup found." });
+    }
+
+    return Results.Ok(meetups);
+});
 
 app.MapPost("/addMember", async (Member member, DevsWhoRunDbContext db) =>
 {
