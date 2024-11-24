@@ -1,3 +1,4 @@
+using System;
 using Microsoft.EntityFrameworkCore;
 
 namespace devs_who_run_api;
@@ -15,6 +16,6 @@ public class DevsWhoRunDbContext: DbContext
             throw new InvalidOperationException("Connection string is not set in environment variables.");
         }
 
-        optionsBuilder.UseNpgsql(connectionString);
+        optionsBuilder.UseNpgsql(connectionString, o=> o.MapEnum<UserType>("usertype"));
     }
 }
