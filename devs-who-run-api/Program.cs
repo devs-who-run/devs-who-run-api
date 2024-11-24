@@ -54,10 +54,18 @@ app.MapPost("/addMember", async (Member member, DevsWhoRunDbContext db) =>
     }
 });
 
+app.MapGet("/getMemberByEmail/{email}", async (string email, DevsWhoRunDbContext db) =>
+    await db.Members.FirstOrDefaultAsync(m => m.Email == email)
+        is Member member
+        ? Results.Ok((object?)member)
+        : Results.NotFound());
+
 app.MapGet("/member/{id:int}",
-    async (int id, DevsWhoRunDbContext db) =>
-        await db.Members.FindAsync(id)
-            is Member member ? Results.Ok(member) : Results.NotFound());
+    async (int id, DevsWhoRunDbContext db) => await db.Members.FindAsync(id)
+        is Member member
+        ? Results.Ok((object?)member)
+        : Results.NotFound());
+
 
 
 app.Run();
