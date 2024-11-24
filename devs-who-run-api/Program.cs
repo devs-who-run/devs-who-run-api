@@ -30,7 +30,7 @@ var partnerConference = new[] { "TIL Conf" }
 
 app.MapGet("/getPartnerConference", async (DevsWhoRunDbContext db) =>
 {
-    var conferences = db.Members.Where(m => m.UserType == UserType.Conf).ToListAsync();
+    var conferences = await db.Members.Where(m => m.UserType == UserType.Conf).ToListAsync();
 
     if (!conferences.Any())
     {
@@ -42,7 +42,7 @@ app.MapGet("/getPartnerConference", async (DevsWhoRunDbContext db) =>
 
 app.MapGet("/getPartnerMeetup", async (DevsWhoRunDbContext db) =>
 {
-    var meetups = db.Members.Where(m => m.UserType == UserType.Meetup).ToListAsync();
+    var meetups = await db.Members.Where(m => m.UserType == UserType.Meetup).ToListAsync();
 
     if (!meetups.Any())
     {
