@@ -24,6 +24,20 @@ var partnerConference = new[] { "TIL Conf"}
 
 app.MapGet("/getPartnerConference", () => partnerConference).WithName("GetPartnerConferences").WithOpenApi();
 
+app.MapPost("/addMember", async (DevsWhoRunDbContext db,  Member member) =>
+{
+    db.Add(member);
+    await db.SaveChangesAsync();
+    return Results.Created();
+});
+
+app.MapGet("/member/{id:int}",
+    async (DevsWhoRunDbContext db, int id) =>
+        await db.Members.FindAsync(id) 
+            is Member member ? Results.Ok(member) : Results.NotFound());
+    
+
+
 // app.MapPost("/addMember", async (Member member)=> )
 
 app.Run();
