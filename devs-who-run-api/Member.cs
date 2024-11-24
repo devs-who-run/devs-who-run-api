@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace devs_who_run_api;
 
 /// <summary>
@@ -16,11 +18,11 @@ public enum UserType
     /// <summary>
     /// Conference organizer with event management permissions
     /// </summary>
-    Conference,
+    Conf,
     /// <summary>
     /// Meetup organizer with group management permissions
     /// </summary>
-    MeetupOrganizer
+    Meetup
 }
 
 public class Member
