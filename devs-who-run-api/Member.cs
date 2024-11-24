@@ -28,12 +28,17 @@ public enum UserType
 public class Member
 {
     public int Id { get; set; }
-    public string? Name { get; set; }
+    [Required]
+    public string? FirstName { get; set; }
+    [Required]
+    public string? LastName { get; set; }
     [EmailAddress]
     [MaxLength(256)]
+    [Required]
     public string? Email { get; set; }
 
     [MaxLength(100)]
+    [Required]
     public string? GitHubUserName { get; set; }
 
     [MaxLength(100)]

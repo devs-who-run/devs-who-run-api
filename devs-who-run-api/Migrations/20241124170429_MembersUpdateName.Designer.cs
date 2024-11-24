@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using devs_who_run_api;
@@ -11,9 +12,11 @@ using devs_who_run_api;
 namespace devs_who_run_api.Migrations
 {
     [DbContext(typeof(DevsWhoRunDbContext))]
-    partial class DevsWhoRunDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241124170429_MembersUpdateName")]
+    partial class MembersUpdateName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
