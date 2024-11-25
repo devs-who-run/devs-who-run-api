@@ -1,17 +1,41 @@
 using devs_who_run_api;
+using devs_who_run_api.Configurations;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<DevsWhoRunDbContext>(options =>
-    // options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
-    options.UseNpgsql("Server=localhost;Port=5432;Database=devswhorun;User Id=postgres;Password=admin;", o => o.MapEnum<UserType>("usertype"))
-);
+// Configure app settings
+var appSettings = new AppSettings();
+builder.Configuration.Bind(appSettings);
+builder.Services.AddSingleton(appSettings);
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+// Configure database
+builder.Services.AddDbContext<DevsWhoRunDbContext>(options =>
+{
+    options.UseNpgsql(
+        appSettings.Database.ConnectionString,
+        npgsqlOptions =>
+        {
+            npgsqlOptions.MapEnum<UserType>("usertype");
+            npgsqlOptions.CommandTimeout(appSettings.Database.CommandTimeout);
+            npgsqlOptions.EnableRetryOnFailure(
+                maxRetryCount: appSettings.Database.MaxRetryCount,
+                maxRetryDelay: TimeSpan.FromSeconds(5),
+                errorCodesToAdd: null);
+        });
+});
+
+// Configure Swagger
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc(appSettings.Swagger.Version, new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Title = appSettings.Swagger.Title,
+        Description = appSettings.Swagger.Description,
+        Version = appSettings.Swagger.Version
+    });
+});
 
 var app = builder.Build();
 
@@ -41,7 +65,5 @@ app.MapGet("/member/{id:int}",
         is Member member
         ? Results.Ok((object?)member)
         : Results.NotFound());
-
-
 
 app.Run();
