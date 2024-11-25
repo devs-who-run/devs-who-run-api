@@ -24,68 +24,11 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/getPartnerConference", async (DevsWhoRunDbContext db) =>
-{
-    try
-    {
-        var conferences = await db.Members.Where(m => m.UserType == UserType.Conf).ToListAsync();
+app.MapGet("/getPartnerConference", MembersEndpoint.GetPartnerConferences);
 
-        if (!conferences.Any())
-        {
-            return Results.NotFound(new { Message = "No partner conferences found." });
-        }
+app.MapGet("/getPartnerMeetup", MembersEndpoint.GetPartnerMeetup);
 
-        return Results.Ok(conferences);
-    }
-    catch (Exception e)
-    {
-        return Results.Problem(e.Message, statusCode: 500);
-    }
-
-});
-
-app.MapGet("/getPartnerMeetup", async (DevsWhoRunDbContext db) =>
-{
-    try
-    {
-        var meetups = await db.Members.Where(m => m.UserType == UserType.Meetup).ToListAsync();
-
-        if (!meetups.Any())
-        {
-            return Results.NotFound(new { Message = "No partner meetup found." });
-        }
-
-        return Results.Ok(meetups);
-    }
-    catch (Exception e)
-    {
-        return Results.Problem(e.Message, statusCode: 500);
-    }
-});
-
-app.MapPost("/addMember", async (Member member, DevsWhoRunDbContext db) =>
-{
-    if (member == null)
-        return Results.BadRequest("Member data is required");
-
-    if (string.IsNullOrEmpty(member.Email))
-        return Results.BadRequest("Email is required");
-
-    try
-    {
-        member.CreatedOn = DateTime.UtcNow;
-        member.UpdatedOn = DateTime.UtcNow;
-
-        db.Members.Add(member);
-        await db.SaveChangesAsync();
-
-        return Results.Created($"/member/{member.Id}", member);
-    }
-    catch (Exception ex)
-    {
-        return Results.Problem(ex.Message, statusCode: 500);
-    }
-});
+app.MapPost("/addMember", MembersEndpoint.AddMembers);
 
 app.MapGet("/getMemberByEmail/{email}", async (string email, DevsWhoRunDbContext db) =>
     await db.Members.FirstOrDefaultAsync(m => m.Email == email)
