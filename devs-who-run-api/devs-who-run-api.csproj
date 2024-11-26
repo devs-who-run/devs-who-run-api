@@ -16,6 +16,7 @@
         </PackageReference>
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.1" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+        <PackageReference Include="Carter" Version="8.1.0" />
     </ItemGroup>
 
     <ItemGroup>
