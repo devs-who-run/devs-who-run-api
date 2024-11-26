@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using devs_who_run_api;
@@ -11,15 +12,18 @@ using devs_who_run_api;
 namespace devs_who_run_api.Migrations
 {
     [DbContext(typeof(DevsWhoRunDbContext))]
-    partial class DevsWhoRunDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241126124946_AddEventsAndConferences")]
+    partial class AddEventsAndConferences
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "9.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
+            NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "user_type", new[] { "user", "admin", "conf", "meetup" });
             NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "usertype", new[] { "admin", "conf", "meetup", "user" });
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 

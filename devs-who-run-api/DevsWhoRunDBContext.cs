@@ -1,23 +1,18 @@
-using System;
+using devs_who_run_api.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace devs_who_run_api;
 
-public class DevsWhoRunDbContext : DbContext
+public class DevsWhoRunDbContext(DbContextOptions<DevsWhoRunDbContext> options) : DbContext(options)
 {
-    public DbSet<Member> Members { get; set; }
+    public DbSet<Member> Members { get; set; } = null!;
+    public DbSet<Event> Events { get; set; } = null!;
+    public DbSet<Conference> Conferences { get; set; } = null!;
 
-    public DevsWhoRunDbContext(DbContextOptions<DevsWhoRunDbContext> options) : base(options) { }
-
-    // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    // {
-    //     //var connectionString = Environment.GetEnvironmentVariable("MyDatabaseConnectionString");
-    //
-    //     // if (string.IsNullOrEmpty(connectionString))
-    //     // {
-    //     //     throw new InvalidOperationException("Connection string is not set in environment variables.");
-    //     // }
-    //
-    //     optionsBuilder.UseNpgsql("Server=localhost;Port=5432;Database=devswhorun;User Id=postgres;Password=admin;", o=> o.MapEnum<UserType>("usertype"));
-    // }
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+        
+        modelBuilder.HasPostgresEnum<UserType>();
+    }
 }
