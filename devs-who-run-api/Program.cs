@@ -1,6 +1,7 @@
 using devs_who_run_api;
 using devs_who_run_api.Configurations;
 using Microsoft.EntityFrameworkCore;
+using Carter;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +26,8 @@ builder.Services.AddDbContext<DevsWhoRunDbContext>(options =>
         });
 });
 
+builder.Services.AddCarter();
+
 // Configure Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -48,22 +51,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/getPartnerConference", MembersEndpoint.GetPartnerConferences);
-
-app.MapGet("/getPartnerMeetup", MembersEndpoint.GetPartnerMeetup);
-
-app.MapPost("/addMember", MembersEndpoint.AddMembers);
-
-app.MapGet("/getMemberByEmail/{email}", async (string email, DevsWhoRunDbContext db) =>
-    await db.Members.FirstOrDefaultAsync(m => m.Email == email)
-        is Member member
-        ? Results.Ok((object?)member)
-        : Results.NotFound());
-
-app.MapGet("/member/{id:int}",
-    async (int id, DevsWhoRunDbContext db) => await db.Members.FindAsync(id)
-        is Member member
-        ? Results.Ok((object?)member)
-        : Results.NotFound());
+app.MapCarter();
 
 app.Run();
