@@ -48,9 +48,9 @@ public class MembersModule : CarterModule
 
             if (string.IsNullOrEmpty(member.Email))
                 return Results.BadRequest("Email is required");
-            
+
             var isEmailExist = await db.Members.AnyAsync(m => m.Email == member.Email);
-            if(isEmailExist) 
+            if (isEmailExist)
                 return Results.BadRequest("Email already exists");
 
             try
@@ -75,7 +75,7 @@ public class MembersModule : CarterModule
             var member = await db.Members.SingleOrDefaultAsync(m => m.Id == id);
             return member is not null ? Results.Ok(member) : Results.NotFound();
         });
-        
+
         app.MapGet("/memberByEmail/{email}", async (string email, DevsWhoRunDbContext db) =>
         {
             var member = await db.Members.SingleOrDefaultAsync(m => m.Email == email);

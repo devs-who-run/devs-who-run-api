@@ -24,3 +24,17 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
+    - name: Run Test
+      run: |
+         dotnet test --no-build --verbosity normal \
+            --logger "trx;LogFileName=test-results.trx" \
+            --collect:"XPlat Code Coverage" \
+            --settings .runsettings \
+    - name: Publish Test Results
+      uses: actions/upload-artifact@v4
+      if: success() || failure()
+      with:
+        name: test-results
+        path: |
+          **/*.trx
+            **/TestResults/**/coverage.cobertura.xml
