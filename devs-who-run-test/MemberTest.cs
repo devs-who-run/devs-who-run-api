@@ -8,7 +8,7 @@ public class MemberModuleTest
 {
 
     [Fact]
-    public async Task GetPartnertMeetup()
+    public async Task GetMembers_WhenFilteredByMeetupType_ShouldReturnOnlyMeetupMembers()
     {
         var options = new DbContextOptionsBuilder<DevsWhoRunDbContext>()
             .UseInMemoryDatabase(databaseName: "TestDatabase")
