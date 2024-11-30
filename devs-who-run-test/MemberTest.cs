@@ -6,7 +6,7 @@ namespace devs_who_run_test;
 
 public class MemberModuleTest
 {
-    
+
     [Fact]
     public async Task GetPartnertMeetup()
     {
@@ -16,8 +16,8 @@ public class MemberModuleTest
 
         await using var context = new DevsWhoRunDbContext(options);
         context.Members.AddRange(
-            new Member { Id = 1, UserType = UserType.Meetup, Email = "meetup1@test.com", FirstName = "This is", LastName = "Learning", GitHubUserName = "@thisislearning"},
-            new Member { Id = 2, UserType = UserType.Conf, Email = "conf1@test.com", FirstName = "This is Learning", LastName = "Conf", GitHubUserName = "@thisislearning"}
+            new Member { Id = 1, UserType = UserType.Meetup, Email = "meetup1@test.com", FirstName = "This is", LastName = "Learning", GitHubUserName = "@thisislearning" },
+            new Member { Id = 2, UserType = UserType.Conf, Email = "conf1@test.com", FirstName = "This is Learning", LastName = "Conf", GitHubUserName = "@thisislearning" }
         );
         await context.SaveChangesAsync();
 
