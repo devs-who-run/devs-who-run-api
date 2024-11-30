@@ -32,7 +32,7 @@ jobs:
             --settings .runsettings \
             -- RunConfiguration.MaxCpuCount=1
     - name: Publish Test Results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: success() || failure()
       with:
         name: test-results
