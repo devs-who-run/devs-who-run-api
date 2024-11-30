@@ -8,5 +8,5 @@ public class DevsWhoRunDbContext : DbContext
     public DbSet<Member> Members { get; set; }
 
     public DevsWhoRunDbContext(DbContextOptions<DevsWhoRunDbContext> options) : base(options) { }
-    
+
 }
