@@ -1,13 +1,18 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "devs-who-run-api", "devs-who-run-api\devs-who-run-api.csproj", "{484F870B-3720-4423-8574-EF8FF769B41B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{00000000-0000-0000-0000-000000000000}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{00000000-0000-0000-0000-000000000000}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevsWhoRun.Api", "src\DevsWhoRun.Api\DevsWhoRun.Api.csproj", "{484F870B-3720-4423-8574-EF8FF769B41B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevsWhoRun.UnitTests", "tests\DevsWhoRun.UnitTests\DevsWhoRun.UnitTests.csproj", "{65C0EB2F-D536-4781-936D-240D43B325ED}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{93B5DB32-8697-49E5-83CC-FF514FE79EBA}"
 	ProjectSection(SolutionItems) = preProject
 		docker-compose.yml = docker-compose.yml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "devs-who-run-test", "devs-who-run-test\devs-who-run-test.csproj", "{65C0EB2F-D536-4781-936D-240D43B325ED}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevsWhoRun.IntegrationTests", "tests\DevsWhoRun.IntegrationTests\DevsWhoRun.IntegrationTests.csproj", "{F82643F8-1F7A-48CB-AC98-FD62878F70F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,5 +28,14 @@ Global
 		{65C0EB2F-D536-4781-936D-240D43B325ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65C0EB2F-D536-4781-936D-240D43B325ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65C0EB2F-D536-4781-936D-240D43B325ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F82643F8-1F7A-48CB-AC98-FD62878F70F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F82643F8-1F7A-48CB-AC98-FD62878F70F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F82643F8-1F7A-48CB-AC98-FD62878F70F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F82643F8-1F7A-48CB-AC98-FD62878F70F9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{484F870B-3720-4423-8574-EF8FF769B41B} = {00000000-0000-0000-0000-000000000000}
+		{65C0EB2F-D536-4781-936D-240D43B325ED} = {00000000-0000-0000-0000-000000000000}
+		{F82643F8-1F7A-48CB-AC98-FD62878F70F9} = {00000000-0000-0000-0000-000000000000}
 	EndGlobalSection
 EndGlobal
