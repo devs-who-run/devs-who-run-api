@@ -50,4 +50,10 @@ public class Member
     public DateTime LastLogin { get; set; }
     public DateTime CreatedOn { get; set; }
     public DateTime UpdatedOn { get; set; }
+    
+    // Authentication fields
+    public string? PasswordHash { get; set; }
+    public bool IsEmailVerified { get; set; }
+    public string? RefreshToken { get; set; }
+    public DateTime? RefreshTokenExpiryTime { get; set; }
 }
