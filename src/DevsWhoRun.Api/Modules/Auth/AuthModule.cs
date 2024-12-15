@@ -1,6 +1,8 @@
 using Carter;
+using DevsWhoRun.Api.Configurations;
 using DevsWhoRun.Api.Modules.Auth.DTOs;
 using DevsWhoRun.Api.Modules.Auth.Services.Interfaces;
+using Microsoft.Extensions.Configuration;
 
 namespace DevsWhoRun.Api.Modules.Auth;
 
@@ -55,6 +57,21 @@ public class AuthModule : CarterModule
                 }
             })
             .WithName("RefreshToken");
+
+        app.MapGet("/github-login", (AppSettings appSettings) =>
+        {
+            var clientId = appSettings.GitHub.ClientId;
+            var redirectUri = appSettings.GitHub.RedirectUri;
+            var scope = appSettings.GitHub.Scope;
+
+            var authorizationUrl = $"{appSettings.GitHub.AuthorizationEndpoint}?" +
+                $"client_id={clientId}&" +
+                $"redirect_uri={redirectUri}&" +
+                $"scope={scope}";
+
+            return Results.Redirect(authorizationUrl);
+        })
+        .WithName("GitHubLogin");
 
         app.MapGet("/github-callback", async (string code, IAuthService authService) =>
             {
