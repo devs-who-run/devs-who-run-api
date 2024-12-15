@@ -39,6 +39,10 @@ public class GitHubSettings
     public string AuthorizationEndpoint { get; set; } = "https://github.com/login/oauth/authorize";
     public string TokenEndpoint { get; set; } = "https://github.com/login/oauth/access_token";
     public string UserInformationEndpoint { get; set; } = "https://api.github.com/user";
+    public string Scope { get; set; } = "user:email";
+    // should changes to prod url latest this is for local
+    public string RedirectUri { get; set; } = "http://localhost:5299/api/auth/github-callback";
+    
     public Dictionary<string, string> ClaimMappings { get; set; } = new()
     {
         { ClaimTypes.NameIdentifier, "id" },
