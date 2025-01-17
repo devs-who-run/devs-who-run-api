@@ -8,6 +8,7 @@ public class AppSettings
     public SwaggerSettings Swagger { get; set; } = new();
     public JwtSettings Jwt { get; set; } = new();
     public GitHubSettings GitHub { get; set; } = new();
+    public DiscordSettings Discord { get; set; } = new();
 }
 
 public class DatabaseSettings
@@ -31,6 +32,12 @@ public class JwtSettings
     public string Audience { get; set; } = string.Empty;
 }
 
+public class DiscordSettings
+{
+    public string BotToken { get; set; } = string.Empty;
+    public string ServerId { get; set; } = string.Empty;
+}
+
 public class GitHubSettings
 {
     public string ClientId { get; set; } = string.Empty;
@@ -42,7 +49,7 @@ public class GitHubSettings
     public string Scope { get; set; } = "user:email";
     // should changes to prod url latest this is for local
     public string RedirectUri { get; set; } = "http://localhost:5299/api/auth/github-callback";
-    
+
     public Dictionary<string, string> ClaimMappings { get; set; } = new()
     {
         { ClaimTypes.NameIdentifier, "id" },

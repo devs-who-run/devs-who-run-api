@@ -7,6 +7,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using DevsWhoRun.Api.Modules.Auth.Services;
 using DevsWhoRun.Api.Modules.Auth.Services.Interfaces;
+using DevsWhoRun.Api.Modules.Discord.Services;
+using DevsWhoRun.Api.Modules.Discord.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -69,6 +71,7 @@ builder.Services.AddDbContext<DevsWhoRunDbContext>(options =>
 // Register services
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IDiscordService, DiscordService>();
 
 builder.Services.AddCarter();
 builder.Services.AddAuthorization();
