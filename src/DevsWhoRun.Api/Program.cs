@@ -9,7 +9,9 @@ using DevsWhoRun.Api.Modules.Auth.Services;
 using DevsWhoRun.Api.Modules.Auth.Services.Interfaces;
 using DevsWhoRun.Api.Modules.Discord.Services;
 using DevsWhoRun.Api.Modules.Discord.Services.Interfaces;
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +19,10 @@ var builder = WebApplication.CreateBuilder(args);
 var appSettings = new AppSettings();
 builder.Configuration.Bind(appSettings);
 builder.Services.AddSingleton(appSettings);
+
+builder.Services.AddHealthChecks()
+    .AddNpgSql(appSettings.Database.ConnectionString)
+    .AddDbContextCheck<DevsWhoRunDbContext>();
 
 // Configure authentication
 builder.Services.AddAuthentication(options =>
@@ -135,6 +141,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.MapHealthChecks("/health", new HealthCheckOptions
+{
+    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+});
 app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
